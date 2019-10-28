@@ -349,6 +349,11 @@ class Jiffy {
     return relative.format(_defaultLocale, _dateTime, dateTime);
   }
 
+  Duration difference(var input) => _dateTime.difference(_parse(input));
+  int differenceInWeeks(var input) => difference(input).inDays ~/ 7;
+  int differenceInMonths(var input) => _monthDiff(_dateTime, _parse(input));
+  int differenceInYears(var input) => differenceInMonths(input) ~/ 12;
+
   num diff(var input, [String units = "ms", bool asFloat = false]) {
     var dateTime = _parse(input);
     units = validateUnits(units);
